@@ -2,10 +2,11 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const connection = mysql.createConnection({
+    user: "root",
     host: "localhost",
     port: 3306,
     database: "employee_tracker_db",
-    password: "",
+    password: "Oakland9557542!",
 });
 // function to view database and decide what you want to do when starting app
 function start() {

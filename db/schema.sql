@@ -1,27 +1,29 @@
-drop database if exists `employee_tracker_db`;
-create database `employee_tracker_db`;
+DROP DATABASE IF EXISTS `employee_tracker_db`;
+CREATE DATABASE `employee_tracker_db`;
 
 USE employee_tracker_db;
--- database table for roles, their pay and title.
-create table roles(
-    id int auto_increment primary key,
-    name varchar(30) not null
-       salary varchar(30) not null,
-    title varchar(30) not null,
+
+-- Database table for roles, their pay, and title.
+CREATE TABLE roles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    salary VARCHAR(30) NOT NULL,
+    title VARCHAR(30) NOT NULL
 );
--- database table for departments 
-create table departments(
- 
-    id int auto_increment primary key,
-    name varchar(30) not null
+
+-- Database table for departments.
+CREATE TABLE departments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL
 );
--- database table for employees also has checks for roles and managers
-create table employees(
-    id int auto_increment primary key,
-    first_name varchar(30) not null,
-    last_name varchar(30) not null,
-    role_id int not null,
-    manager_id int not null,
-    foreign key (role_id) references roles(id),
-    foreign key (manager_id) references employees(id)
+
+-- Database table for employees also has checks for roles and managers.
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    role_id INT NOT NULL,
+    manager_id INT, -- This can be NULL
+    FOREIGN KEY (role_id) REFERENCES roles(id),
+    FOREIGN KEY (manager_id) REFERENCES employees(id)
 );
