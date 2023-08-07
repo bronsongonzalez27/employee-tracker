@@ -83,6 +83,38 @@ function getDepartments() {
     });
 }
 function addEmployee() {
-    
-
+    inquirer.prompt([
+        {
+            name: "first_name",
+            type: "input",
+            message: "Enter the employee's first name:",
+        },
+        {
+            name: "last_name",
+            type: "input",
+            message: "Enter the employee's last name:",
+        },
+        {
+            name: "role_id",
+            type: "input",
+            message: "Enter the role ID for the employee:",
+        },
+       
+    ])
+    .then((answers) => {
+        connection.query(
+            "INSERT INTO employee SET ?",
+            {
+                first_name: answers.first_name,
+                last_name: answers.last_name,
+                role_id: answers.role_id,
+                
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log("Employee added successfully!");
+                start();
+            }
+        );
+    });
 }
