@@ -157,28 +157,33 @@ function addRole() {
 }
 
 
-// function addDepartment() {
-//     prompt([
-//         {
-//             name: "name",
-//             type: "input",
-//             message: "Enter the name of the department:",
-//         },
-//     ])
-// }
-// function updateEmployeeRole() {
-//     prompt([
-//         {
-//             name: "id",
-//             type: "input",
-//             message: "Enter the ID of the employee you would like to update:",
-//         },
-//         {
-//             name: "role_id",
-//             type: "input",
-//             message: "Enter the new role ID for the employee:",
-//         },
-//     ])
-// }
+function addDepartment() {
+    prompt([
+        {
+            name: "name",
+            type: "input",
+            message: "Enter the name of the department:",
+        },
+    ])
+}
+// .then((answers) => {
+//     "insert into departments set ?",
+//     {
+        
+    // }
+function updateEmployeeRole() {
+    prompt([
+        {
+            name: "id",
+            type: "input",
+            message: "Enter the ID of the employee you would like to update:",
+        },
+        {
+            name: "role_id",
+            type: "input",
+            message: "Enter the new role ID for the employee:",
+        },
+    ])
+}
 
 start();
