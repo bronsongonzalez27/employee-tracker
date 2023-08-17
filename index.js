@@ -120,4 +120,65 @@ function addEmployee() {
         );
     });
 }
+function addRole() {
+    prompt([
+        {
+            name: "title",
+            type: "input",
+            message: "Enter the title of the role:",
+        },
+        {
+            name: "salary",
+            type: "input",
+            message: "Enter the salary for the role:",
+        },
+        {
+            name: "department_id",
+            type: "input",
+            message: "Enter the department ID for the role:",
+        },
+    ])
+    .then((answers) => {
+        connection.query(
+            "INSERT INTO roles SET ?",
+            {
+                first_name: answers.first_name,
+                last_name: answers.last_name,
+                role_id: answers.role_id,
+                
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log("Employee added successfully!");
+                start();
+            }
+        );
+    });
+}
+
+
+// function addDepartment() {
+//     prompt([
+//         {
+//             name: "name",
+//             type: "input",
+//             message: "Enter the name of the department:",
+//         },
+//     ])
+// }
+// function updateEmployeeRole() {
+//     prompt([
+//         {
+//             name: "id",
+//             type: "input",
+//             message: "Enter the ID of the employee you would like to update:",
+//         },
+//         {
+//             name: "role_id",
+//             type: "input",
+//             message: "Enter the new role ID for the employee:",
+//         },
+//     ])
+// }
+
 start();
