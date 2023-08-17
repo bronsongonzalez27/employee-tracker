@@ -1,17 +1,18 @@
 
-const inquirer = require("inquirer");
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    port: 3306,
-    database: "employee_tracker_db",
-    password: "Oakland9557542!",
-});
+const { prompt } = require("inquirer");
+const connection = require("./connection");
+// const connection = mysql.createConnection({
+//     user: "root",
+//     host: "localhost",
+//     port: 3306,
+//     database: "employee_tracker_db",
+//     password: "Oakland9557542!",
+// });
+
 // function to view database and decide what you want to do when starting app
 function start() {
-    inquirer
-        .prompt({
+    
+        prompt({
             name: "action",
             type: "list",
             message: "What would you like to do?",
@@ -63,28 +64,28 @@ connection.connect((err) => {
   });
 // this is used to find employess that are stored in the database
 function getEmployees() {
-    connection.query("SELECT * FROM employee", function (err, res) {
+    connection.query("SELECT * FROM employees", function (err, res) {
         if (err) throw err;
         console.table(res);
         start();
     });
 }
 function getRoles() {
-    connection.query("SELECT * FROM role", function (err, res) {
+    connection.query("SELECT * FROM roles", function (err, res) {
         if (err) throw err;
         console.table(res);
         start();
     });
 }
 function getDepartments() {
-    connection.query("SELECT * FROM department", function (err, res) {
+    connection.query("SELECT * FROM departments", function (err, res) {
         if (err) throw err;
         console.table(res);
         start();
     });
 }
 function addEmployee() {
-    inquirer.prompt([
+    prompt([
         {
             name: "first_name",
             type: "input",
@@ -104,7 +105,7 @@ function addEmployee() {
     ])
     .then((answers) => {
         connection.query(
-            "INSERT INTO employee SET ?",
+            "INSERT INTO employees SET ?",
             {
                 first_name: answers.first_name,
                 last_name: answers.last_name,
@@ -119,3 +120,65 @@ function addEmployee() {
         );
     });
 }
+function addRole() {
+    prompt([
+        {
+            name: "title",
+            type: "input",
+            message: "Enter the title of the role:",
+        },
+        {
+            name: "salary",
+            type: "input",
+            message: "Enter the salary for the role:",
+        },
+        {
+            name: "department_id",
+            type: "input",
+            message: "Enter the department ID for the role:",
+        },
+    ])
+    .then((answers) => {
+        connection.query(
+            "INSERT INTO roles SET ?",
+            {
+                first_name: answers.first_name,
+                last_name: answers.last_name,
+                role_id: answers.role_id,
+                
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log("Employee added successfully!");
+                start();
+            }
+        );
+    });
+}
+
+
+// function addDepartment() {
+//     prompt([
+//         {
+//             name: "name",
+//             type: "input",
+//             message: "Enter the name of the department:",
+//         },
+//     ])
+// }
+// function updateEmployeeRole() {
+//     prompt([
+//         {
+//             name: "id",
+//             type: "input",
+//             message: "Enter the ID of the employee you would like to update:",
+//         },
+//         {
+//             name: "role_id",
+//             type: "input",
+//             message: "Enter the new role ID for the employee:",
+//         },
+//     ])
+// }
+
+start();
