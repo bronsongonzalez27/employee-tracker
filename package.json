@@ -1,0 +1,12 @@
+{
+    "name": "employee-tracker",
+    "version": "1.0.0",
+   
+    "dependencies": {
+        "inquirer": "^8.2.4",
+        "install": "^0.13.0",
+        "mysql": "^2.18.1",
+        "mysql2": "^3.5.2",
+        "npm": "^9.8.1"
+    }
+}
